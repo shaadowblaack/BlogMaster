@@ -3,7 +3,14 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "sh -c 'cd client && bun install && bun run build && cd ../server && bun install && bun run build'",
-    "start": "sh -c 'cd server && bun start'"
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install && npm run build",
+    "start": "cd server && npm start",
+    "dev:client": "cd client && npm install && npm run dev",
+    "dev:server": "cd server && npm install && npm run dev",
+    "lint": "cd server && npm run lint && cd ../client && npm run lint",
+    "typecheck": "cd server && npm run typecheck && cd ../client && npm run typecheck",
+    "test": "cd server && npm test"
   }
 }
