@@ -5,8 +5,8 @@ services:
     runtime: node
     nodeVersion: "22"
     plan: starter
-    buildCommand: cd client && npm install && npm run build && cd ../server && npm install && npm run build
-    startCommand: cd server && npm start
+    buildCommand: cd client && bun install && bun run build && cd ../server && bun install && bun run build
+    startCommand: cd server && bun start
     healthCheckPath: /api/healthz
     envVars:
       - key: NODE_ENV
