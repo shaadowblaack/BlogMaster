@@ -2,7 +2,7 @@ services:
   - type: web
     name: blog-master
     runtime: node
-    nodeVersion: 22
+    nodeVersion: "22"
     plan: starter
     buildCommand: npm run build
     startCommand: npm start

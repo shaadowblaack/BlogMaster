@@ -3,13 +3,13 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
-    "start": "cd server && npm start",
-    "dev:client": "cd client && npm install && npm run dev",
-    "dev:server": "cd server && npm install && npm run dev",
-    "lint": "cd server && npm run lint && cd ../client && npm run lint",
-    "lint:fix": "cd server && npm run lint:fix && cd ../client && npm run lint:fix",
-    "typecheck": "cd server && npm run typecheck && cd ../client && npm run typecheck",
-    "test": "cd server && npm test"
+    "build": "sh -c 'cd client && npm install && npm run build && cd ../server && npm install && npm run build'",
+    "start": "sh -c 'cd server && npm start'",
+    "dev:client": "sh -c 'cd client && npm install && npm run dev'",
+    "dev:server": "sh -c 'cd server && npm install && npm run dev'",
+    "lint": "sh -c 'cd server && npm run lint && cd ../client && npm run lint'",
+    "lint:fix": "sh -c 'cd server && npm run lint:fix && cd ../client && npm run lint:fix'",
+    "typecheck": "sh -c 'cd server && npm run typecheck && cd ../client && npm run typecheck'",
+    "test": "sh -c 'cd server && npm test'"
   }
 }
