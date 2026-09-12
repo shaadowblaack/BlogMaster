@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { X, Eye, EyeOff } from 'lucide-react';
 import { useUserAuth } from '@/contexts/UserAuthContext';
+import { customFetch, ApiError } from '@/api/custom-fetch';
 
 interface AuthModalProps {
   initialTab?: 'login' | 'register';
@@ -54,18 +55,15 @@ export function AuthModal({
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/users/login', {
+       await customFetch('/api/users/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ username, password }),
       });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error || 'Login failed'); return; }
       await refresh();
       onSuccess?.();
-    } catch {
-      setError('Connection failed. Try again.');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setError(errorData?.error ?? 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -80,18 +78,15 @@ export function AuthModal({
     }
     setLoading(true);
     try {
-      const res = await fetch('/api/users/register', {
+       await customFetch('/api/users/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ username, displayName: displayName || username, email: email || undefined, password }),
       });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error || 'Registration failed'); return; }
       await refresh();
       onSuccess?.();
-    } catch {
-      setError('Connection failed. Try again.');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setError(errorData?.error ?? 'Registration failed');
     } finally {
       setLoading(false);
     }
@@ -107,18 +102,15 @@ export function AuthModal({
     }
     setLoading(true);
     try {
-      const res = await fetch('/api/users/change-password', {
+      await customFetch('/api/users/change-password', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ currentPassword, newPassword }),
       });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error || 'Failed to change password'); return; }
       setSuccess('Password changed successfully!');
       setTimeout(() => { if (onSuccess) onSuccess(); else onClose(); }, 1500);
-    } catch {
-      setError('Connection failed. Try again.');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setError(errorData?.error ?? 'Failed to change password');
     } finally {
       setLoading(false);
     }

@@ -6,6 +6,7 @@ import {
   useCallback,
   ReactNode,
 } from 'react';
+import { customFetch } from '@/api/custom-fetch';
 
 export interface AuthUser {
   id: string;
@@ -42,13 +43,8 @@ export function UserAuthProvider({ children }: { children: ReactNode }) {
 
   const refresh = useCallback(async () => {
     try {
-      const res = await fetch('/api/users/me', { credentials: 'include' });
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      } else {
-        setUser(null);
-      }
+      const data = await customFetch<{ user: AuthUser | null }>('/api/users/me');
+      setUser(data.user);
     } catch {
       setUser(null);
     } finally {
@@ -61,7 +57,7 @@ export function UserAuthProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const logout = useCallback(async () => {
-    await fetch('/api/users/logout', { method: 'POST', credentials: 'include' });
+    await customFetch('/api/users/logout', { method: 'POST' });
     setUser(null);
   }, []);
 

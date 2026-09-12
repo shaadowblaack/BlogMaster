@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Pencil, Trash2, Check, X } from 'lucide-react';
 import { useUserAuth } from '@/contexts/UserAuthContext';
 import { format } from 'date-fns';
+import { customFetch, ApiError } from '@/api/custom-fetch';
 
 interface Comment {
   id: number;
@@ -54,17 +55,25 @@ export function CommentSection({ postId }: CommentSectionProps) {
   const [editSaving, setEditSaving] = useState(false);
 
   async function fetchComments() {
-    const res = await fetch(`/api/posts/${postId}/comments`);
-    if (res.ok) setComments(await res.json());
-    setCommentsLoading(false);
+    try {
+      const data = await customFetch<Comment[]>(`/api/posts/${postId}/comments`);
+      setComments(data);
+    } catch {
+      // ignore — keep existing comments
+    } finally {
+      setCommentsLoading(false);
+    }
   }
 
   async function fetchReactions() {
-    const res = await fetch(`/api/posts/${postId}/reactions`, {
-      credentials: 'include',
-      headers: { 'x-guest-id': guestId },
-    });
-    if (res.ok) setReactions(await res.json());
+    try {
+      const data = await customFetch<ReactionCounts>(`/api/posts/${postId}/reactions`, {
+        headers: { 'x-guest-id': guestId },
+      });
+      setReactions(data);
+    } catch {
+      // ignore
+    }
   }
 
   useEffect(() => {
@@ -82,19 +91,11 @@ export function CommentSection({ postId }: CommentSectionProps) {
     }
     setPosting(true);
     try {
-      const res = await fetch(`/api/posts/${postId}/comments`, {
+      const comment: Comment = await customFetch<Comment>(`/api/posts/${postId}/comments`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        headers: { 'x-guest-id': guestId },
         body: JSON.stringify({ body, authorName: guestName, authorEmail: guestEmail }),
       });
-      if (!res.ok) {
-        const d = await res.json();
-        setPostError(d.error || 'Failed to post comment');
-        return;
-      }
-      const comment: Comment = await res.json();
-      // Save edit token for guests
       if (!user && comment.editToken) {
         saveEditToken(comment.id, comment.editToken);
       }
@@ -102,25 +103,24 @@ export function CommentSection({ postId }: CommentSectionProps) {
       setBody('');
       setGuestName('');
       setGuestEmail('');
-    } catch {
-      setPostError('Connection failed. Try again.');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setPostError(errorData?.error || 'Failed to post comment');
     } finally {
       setPosting(false);
     }
   }
 
   async function handleReact(emoji: string) {
-    const res = await fetch(`/api/posts/${postId}/reactions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-guest-id': guestId,
-      },
-      credentials: 'include',
-      body: JSON.stringify({ emoji }),
-    });
-    if (res.ok) {
-      const { toggled } = await res.json();
+    try {
+      const { toggled } = await customFetch<{ toggled: string }>(
+        `/api/posts/${postId}/reactions`,
+        {
+          method: 'POST',
+          headers: { 'x-guest-id': guestId },
+          body: JSON.stringify({ emoji }),
+        },
+      );
       setReactions((prev) => {
         const newCounts = { ...prev.counts };
         const newMine = [...prev.mine];
@@ -134,6 +134,8 @@ export function CommentSection({ postId }: CommentSectionProps) {
         }
         return { counts: newCounts, mine: newMine };
       });
+    } catch {
+      // ignore
     }
   }
 
@@ -146,18 +148,18 @@ export function CommentSection({ postId }: CommentSectionProps) {
     if (!editBody.trim()) return;
     setEditSaving(true);
     const editToken = c.userId ? undefined : getEditToken(c.id);
-    const res = await fetch(`/api/comments/${c.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ body: editBody, editToken }),
-    });
-    if (res.ok) {
-      const updated: Comment = await res.json();
+    try {
+      const updated: Comment = await customFetch<Comment>(`/api/comments/${c.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ body: editBody, editToken }),
+      });
       setComments((prev) => prev.map((x) => (x.id === c.id ? { ...x, ...updated } : x)));
       setEditingId(null);
+    } catch {
+      // ignore
+    } finally {
+      setEditSaving(false);
     }
-    setEditSaving(false);
   }
 
   function canEdit(c: Comment): boolean {
@@ -170,12 +172,14 @@ export function CommentSection({ postId }: CommentSectionProps) {
   async function handleDelete(c: Comment) {
     if (!confirm('Delete this comment?')) return;
     const editToken = c.userId ? undefined : getEditToken(c.id);
-    await fetch(`/api/comments/${c.id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ editToken }),
-    });
+    try {
+      await customFetch(`/api/comments/${c.id}`, {
+        method: 'DELETE',
+        body: JSON.stringify({ editToken }),
+      });
+    } catch {
+      // ignore — proceed with optimistic removal
+    }
     setComments((prev) => prev.filter((x) => x.id !== c.id));
   }
 

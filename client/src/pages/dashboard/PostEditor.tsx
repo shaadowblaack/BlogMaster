@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Save, ImageOff, Upload, Link2 } from 'lucide-react';
 import { resolveImageUrl } from '@/lib/image-url';
+import { customFetch } from '@/api/custom-fetch';
 
 // ── Image upload hook (direct multipart upload to backend) ────────────────────
 function useUploadCover(onDone: (url: string) => void) {
@@ -25,13 +26,10 @@ function useUploadCover(onDone: (url: string) => void) {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await fetch('/api/storage/upload', {
+      const { url } = await customFetch<{ url: string }>('/api/storage/upload', {
         method: 'POST',
         body: formData,
-        credentials: 'include',
       });
-      if (!res.ok) throw new Error('Upload failed');
-      const { url } = await res.json();
       onDone(url);
     } catch (err: unknown) {
       setUploadError(err instanceof Error ? err.message : 'Upload failed');

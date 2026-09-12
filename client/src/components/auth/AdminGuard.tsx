@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react';
 import AdminLogin from '@/pages/AdminLogin';
+import { customFetch } from '@/api/custom-fetch';
 
 interface AdminGuardProps {
   children: ReactNode;
@@ -9,15 +10,13 @@ export function useAdminAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    fetch('/api/auth/user', { credentials: 'include' })
-      .then((r) => r.json())
+    customFetch<{ user: unknown } | null>('/api/auth/user')
       .then((data) => setIsAuthenticated(!!data?.user))
       .catch(() => setIsAuthenticated(false));
   }, []);
 
   const refetch = () => {
-    fetch('/api/auth/user', { credentials: 'include' })
-      .then((r) => r.json())
+    customFetch<{ user: unknown } | null>('/api/auth/user')
       .then((data) => setIsAuthenticated(!!data?.user))
       .catch(() => setIsAuthenticated(false));
   };

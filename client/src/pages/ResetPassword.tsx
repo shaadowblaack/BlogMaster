@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useLocation, Link } from 'wouter';
 import { Eye, EyeOff } from 'lucide-react';
+import { customFetch, ApiError } from '@/api/custom-fetch';
 
 export default function ResetPassword() {
   const [location] = useLocation();
@@ -53,20 +54,15 @@ export default function ResetPassword() {
 
     setLoading(true);
     try {
-      const res = await fetch('/api/users/reset-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, newPassword }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || 'Reset failed');
-        return;
-      }
+      await customFetch<unknown>(
+        '/api/users/reset-password',
+        { method: 'POST', body: JSON.stringify({ token, newPassword }) },
+      );
       setDone(true);
       setTimeout(() => navigate('/'), 2500);
-    } catch {
-      setError('Connection failed. Try again.');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setError(errorData?.error ?? 'Connection failed. Try again.');
     } finally {
       setLoading(false);
     }

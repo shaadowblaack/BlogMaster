@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { FileText, Settings, LayoutDashboard, ArrowLeft, PenTool, LogOut, Zap } from 'lucide-react';
 import { useGetProfile } from '@/api';
 import { useQueryClient } from '@tanstack/react-query';
+import { customFetch } from '@/api/custom-fetch';
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   const [location, navigate] = useLocation();
@@ -17,7 +18,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   ];
 
   async function handleLogout() {
-    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    await customFetch('/api/auth/logout', { method: 'POST' });
     queryClient.clear();
     navigate('/');
     window.location.reload();

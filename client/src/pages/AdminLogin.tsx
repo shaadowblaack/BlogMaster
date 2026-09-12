@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useLocation } from 'wouter';
 import { Eye, EyeOff } from 'lucide-react';
+import { customFetch, ApiError } from '@/api/custom-fetch';
 
 interface AdminLoginProps {
   onSuccess?: () => void;
@@ -19,21 +20,15 @@ export default function AdminLogin({ onSuccess }: AdminLoginProps) {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/login', {
+       await customFetch<unknown>('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ username, password }),
       });
-      if (res.ok) {
-        if (onSuccess) onSuccess();
-        else navigate('/dashboard');
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setError(data.error ?? 'ACCESS DENIED');
-      }
-    } catch {
-      setError('CONNECTION FAILED. TRY AGAIN.');
+      if (onSuccess) onSuccess();
+      else navigate('/dashboard');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setError(errorData?.error ?? 'ACCESS DENIED');
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { Link } from 'wouter';
+import { customFetch, ApiError } from '@/api/custom-fetch';
 
 export default function ForgotPassword() {
   const [identifier, setIdentifier] = useState('');
@@ -14,22 +15,19 @@ export default function ForgotPassword() {
     setResetLink('');
     setLoading(true);
     try {
-      const res = await fetch('/api/users/forgot-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: identifier.trim() }),
-      });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error || 'Something went wrong'); return; }
+       const data = await customFetch<{ token?: string }>(
+        '/api/users/forgot-password',
+        { method: 'POST', body: JSON.stringify({ identifier: identifier.trim() }) },
+      );
       if (data.token) {
         const url = `${window.location.origin}/reset-password?token=${data.token}`;
         setResetLink(url);
       } else {
-        // Account not found — show same success-looking message
         setResetLink('NOT_FOUND');
       }
-    } catch {
-      setError('Connection failed. Try again.');
+    } catch (err) {
+      const errorData = (err as ApiError)?.data as { error?: string } | null;
+      setError(errorData?.error ?? 'Connection failed. Try again.');
     } finally {
       setLoading(false);
     }
