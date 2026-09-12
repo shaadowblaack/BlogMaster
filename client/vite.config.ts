@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'node:fs';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
@@ -19,6 +20,18 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    {
+      name: 'spa-fallback',
+      apply: 'build',
+      closeBundle() {
+        const distDir = path.resolve(import.meta.dirname, 'dist');
+        const indexPath = path.join(distDir, 'index.html');
+        const notFoundPath = path.join(distDir, '404.html');
+        if (fs.existsSync(indexPath)) {
+          fs.copyFileSync(indexPath, notFoundPath);
+        }
+      },
+    },
   ],
   resolve: {
     alias: {
