@@ -13,6 +13,9 @@ const basePath = process.env.BASE_PATH || '/';
 
 export default defineConfig({
   base: basePath,
+  env: {
+    VITE_API_BASE_URL: process.env.VITE_API_BASE_URL || '',
+  },
   plugins: [
     react(),
     tailwindcss(),
