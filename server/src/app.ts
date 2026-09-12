@@ -8,8 +8,23 @@ import router from './routes/index.js';
 
 const app: Express = express();
 
-const frontendOrigin = process.env.FRONTEND_URL || 'https://blogmaster-client.onrender.com';
-app.use(cors({ credentials: true, origin: frontendOrigin }));
+const envOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((s) => s.trim())
+  : [];
+const allowedOrigins = new Set([...envOrigins, 'https://blogmaster-client.onrender.com']);
+
+app.use(
+  cors({
+    credentials: true,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.has(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  }),
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
