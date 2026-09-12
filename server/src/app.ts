@@ -8,7 +8,7 @@ import router from './routes/index.js';
 
 const app: Express = express();
 
-const frontendOrigin = process.env.FRONTEND_URL || 'https://blog-master-frontend.onrender.com';
+const frontendOrigin = process.env.FRONTEND_URL || 'https://blogmaster-client.onrender.com';
 app.use(cors({ credentials: true, origin: frontendOrigin }));
 app.use(cookieParser());
 app.use(express.json());
