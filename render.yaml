@@ -1,10 +1,10 @@
 services:
-  # Backend API server (also serves frontend static files)
   - type: web
     name: blog-master
     runtime: node
     nodeVersion: "22"
     plan: starter
+    rootDir: server
     buildCommand: npm run build
     startCommand: npm start
     healthCheckPath: /api/healthz
