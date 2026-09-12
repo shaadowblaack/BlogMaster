@@ -1,11 +1,12 @@
 services:
+  # Backend API server (also serves frontend static files)
   - type: web
     name: blog-master
     runtime: node
     nodeVersion: "22"
     plan: starter
-    buildCommand: sh -c 'rm -rf node_modules && cd client && npm install && npm run build && cd ../server && npm install && npm run build'
-    startCommand: sh -c 'cd server && npm start'
+    buildCommand: cd client && npm install && npm run build && cd ../server && npm install && npm run build
+    startCommand: cd server && npm start
     healthCheckPath: /api/healthz
     envVars:
       - key: NODE_ENV
