@@ -1,5 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
-import { getNextId } from './Counter';
+import { getNextId } from './Counter.js';
 
 export interface CommentDoc extends Document {
   id: number;

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import SessionModel, { SessionData } from '../models/Session';
-import { logger } from '../lib/logger';
+import SessionModel, { SessionData } from '../models/Session.js';
+import { logger } from '../lib/logger.js';
 
 export const SESSION_COOKIE = 'sid';
 export const SESSION_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days

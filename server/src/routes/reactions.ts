@@ -1,7 +1,7 @@
 import { Router, Response } from 'express';
-import Reaction from '../models/Reaction';
-import Post from '../models/Post';
-import { AuthedRequest } from '../middleware/auth';
+import Reaction from '../models/Reaction.js';
+import Post from '../models/Post.js';
+import { AuthedRequest } from '../middleware/auth.js';
 
 const router = Router();
 

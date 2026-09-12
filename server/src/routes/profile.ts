@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import Profile from '../models/Profile';
-import { AuthedRequest } from '../middleware/auth';
+import Profile from '../models/Profile.js';
+import { AuthedRequest } from '../middleware/auth.js';
 
 const router = Router();
 

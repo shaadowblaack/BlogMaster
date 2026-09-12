@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { authLimiter } from '../middleware/rateLimit';
+import { authLimiter } from '../middleware/rateLimit.js';
 import {
   createSession,
   clearSession,
   getSessionId,
   setSessionCookie,
-} from '../middleware/auth';
-import { logger } from '../lib/logger';
+} from '../middleware/auth.js';
+import { logger } from '../lib/logger.js';
 
 const router = Router();
 

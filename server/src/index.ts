@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import app from './app';
-import { connectDB } from './lib/db';
-import { logger } from './lib/logger';
-import User from './models/User';
-import { hashPassword } from './lib/password';
+import app from './app.js';
+import { connectDB } from './lib/db.js';
+import { logger } from './lib/logger.js';
+import User from './models/User.js';
+import { hashPassword } from './lib/password.js';
 
 const rawPort = process.env.PORT;
 const port = rawPort ? Number(rawPort) : 5000;

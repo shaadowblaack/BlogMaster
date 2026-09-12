@@ -1,14 +1,14 @@
 import { Router, type IRouter } from 'express';
-import healthRouter from './health';
-import authRouter from './auth';
-import usersRouter from './users';
-import postsRouter from './posts';
-import tagsRouter from './tags';
-import profileRouter from './profile';
-import statsRouter from './stats';
-import commentsRouter from './comments';
-import reactionsRouter from './reactions';
-import storageRouter from './storage';
+import healthRouter from './health.js';
+import authRouter from './auth.js';
+import usersRouter from './users.js';
+import postsRouter from './posts.js';
+import tagsRouter from './tags.js';
+import profileRouter from './profile.js';
+import statsRouter from './stats.js';
+import commentsRouter from './comments.js';
+import reactionsRouter from './reactions.js';
+import storageRouter from './storage.js';
 
 const router: IRouter = Router();
 

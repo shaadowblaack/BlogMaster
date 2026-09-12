@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import crypto from 'crypto';
-import Comment from '../models/Comment';
-import Post from '../models/Post';
-import { AuthedRequest } from '../middleware/auth';
+import Comment from '../models/Comment.js';
+import Post from '../models/Post.js';
+import { AuthedRequest } from '../middleware/auth.js';
 
 const router = Router();
 

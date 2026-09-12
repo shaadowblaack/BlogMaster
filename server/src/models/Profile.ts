@@ -1,5 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
-import { getNextId } from './Counter';
+import { getNextId } from './Counter.js';
 
 export interface ProfileDoc extends Document {
   id: number;

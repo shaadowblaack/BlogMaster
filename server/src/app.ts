@@ -3,9 +3,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { authMiddleware } from './middleware/auth';
-import { apiLimiter } from './middleware/rateLimit';
-import router from './routes';
+import { authMiddleware } from './middleware/auth.js';
+import { apiLimiter } from './middleware/rateLimit.js';
+import router from './routes/index.js';
 
 const app: Express = express();
 

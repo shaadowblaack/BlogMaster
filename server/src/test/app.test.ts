@@ -106,7 +106,7 @@ vi.mock('../models/PasswordResetToken', () => ({
   },
 }));
 
-import app from '../app';
+import app from '../app.js';
 
 async function loginAsAdmin() {
   const agent = request.agent(app);

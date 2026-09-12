@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { FilterQuery } from 'mongoose';
-import Post, { PostDoc } from '../models/Post';
-import Tag from '../models/Tag';
-import PostTag from '../models/PostTag';
-import { slugify } from '../lib/slugify';
-import { AuthedRequest } from '../middleware/auth';
+import Post, { PostDoc } from '../models/Post.js';
+import Tag from '../models/Tag.js';
+import PostTag from '../models/PostTag.js';
+import { slugify } from '../lib/slugify.js';
+import { AuthedRequest } from '../middleware/auth.js';
 
 interface TagSummary {
   id: number;

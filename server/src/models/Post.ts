@@ -1,6 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
-import { getNextId } from './Counter';
-import { TagDoc } from './Tag';
+import { getNextId } from './Counter.js';
+import { TagDoc } from './Tag.js';
 
 export type PostStatus = 'draft' | 'published';
 

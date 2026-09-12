@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import crypto from 'crypto';
-import User from '../models/User';
-import PasswordResetToken from '../models/PasswordResetToken';
-import { hashPassword, verifyPassword } from '../lib/password';
-import { createSession, clearSession, getSessionId, setSessionCookie } from '../middleware/auth';
-import { authLimiter } from '../middleware/rateLimit';
+import User from '../models/User.js';
+import PasswordResetToken from '../models/PasswordResetToken.js';
+import { hashPassword, verifyPassword } from '../lib/password.js';
+import { createSession, clearSession, getSessionId, setSessionCookie } from '../middleware/auth.js';
+import { authLimiter } from '../middleware/rateLimit.js';
 
 const router = Router();
 

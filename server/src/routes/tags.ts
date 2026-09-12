@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Tag from '../models/Tag';
+import Tag from '../models/Tag.js';
 
 const router = Router();
 
