@@ -118,7 +118,7 @@ export default function Home() {
 
                     {/* excerpt */}
                     {post.excerpt && (
-                      <p className="font-vt text-lg text-muted-foreground leading-snug line-clamp-2">
+                      <p className="font-vt text-lg text-muted-foreground leading-snug">
                         {post.excerpt}
                       </p>
                     )}

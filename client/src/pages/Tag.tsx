@@ -35,24 +35,53 @@ export default function TagPage() {
         ) : postsData?.posts.length === 0 ? (
           <p className="text-muted-foreground italic font-serif">No writings found for this topic.</p>
         ) : (
-          postsData?.posts.map((post) => (
-            <article key={post.id} className="group">
-              <Link href={`/posts/${post.slug}`} className="block">
-                <div className="mb-2 text-sm text-muted-foreground">
-                  <time dateTime={post.publishedAt || post.createdAt}>
-                    {format(new Date(post.publishedAt || post.createdAt), 'MMMM d, yyyy')}
+          postsData?.posts.map((post, idx) => (
+            <Link key={post.id} href={`/posts/${post.slug}`} className="block no-underline group">
+              <article
+                className="border-2 border-border p-5 transition-all duration-100 group-hover:border-primary"
+                style={{ boxShadow: '3px 3px 0 hsl(232 30% 22%)' }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.boxShadow = '5px 5px 0 hsl(191 100% 50% / 0.4)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.boxShadow = '3px 3px 0 hsl(232 30% 22%)';
+                }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-pixel text-[11px] text-primary">{String(idx + 1).padStart(2, '0')}.</span>
+                    {post.tags && post.tags.length > 0 && (
+                      <span
+                        className="font-pixel text-[10px] px-2 py-1 text-accent-foreground bg-accent"
+                        style={{ boxShadow: '2px 2px 0 hsl(51 100% 35%)' }}
+                      >
+                        {post.tags[0].name.toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                  <time className="font-pixel text-[10px] text-muted-foreground"
+                    dateTime={post.publishedAt || post.createdAt}>
+                    {format(new Date(post.publishedAt || post.createdAt), 'yyyy.MM.dd')}
                   </time>
                 </div>
-                <h3 className="text-2xl font-serif text-foreground group-hover:text-primary transition-colors mb-3">
-                  {post.title}
+
+                <h3 className="font-pixel text-[10px] md:text-xs text-foreground group-hover:text-primary transition-colors leading-loose mb-3">
+                  {post.title.toUpperCase()}
                 </h3>
+
                 {post.excerpt && (
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="font-vt text-lg text-muted-foreground leading-snug">
                     {post.excerpt}
                   </p>
                 )}
-              </Link>
-            </article>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="font-pixel text-[10px] text-primary group-hover:text-glow">
+                    ▶ READ QUEST
+                  </span>
+                </div>
+              </article>
+            </Link>
           ))
         )}
       </div>
