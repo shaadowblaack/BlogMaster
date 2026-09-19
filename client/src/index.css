@@ -47,36 +47,46 @@
 :root,
 [data-theme="tokyo"] {
   /* Backgrounds */
-  --background:   237 28% 14%;   /* #1a1b2e */
-  --foreground:   229 35% 76%;   /* #a9b1d6 */
-  --border:       228 24% 30%;   /* #3b4261 */
-  --input:        228 25% 22%;
-  --ring:         220 90% 72%;
+  --background: 237 28% 14%;
+  /* #1a1b2e */
+  --foreground: 229 35% 76%;
+  /* #a9b1d6 */
+  --border: 228 24% 30%;
+  /* #3b4261 */
+  --input: 228 25% 22%;
+  --ring: 220 90% 72%;
 
-  --card:         232 23% 15%;   /* #1e2030 */
+  --card: 232 23% 15%;
+  /* #1e2030 */
   --card-foreground: 229 35% 76%;
 
-  --popover:      232 23% 15%;
+  --popover: 232 23% 15%;
   --popover-foreground: 229 35% 76%;
 
   /* Electric blue primary */
-  --primary:      220 90% 72%;   /* #7aa2f7 */
+  --primary: 220 90% 72%;
+  /* #7aa2f7 */
   --primary-foreground: 237 28% 10%;
 
-  --secondary:    228 25% 19%;   /* #24283b */
+  --secondary: 228 25% 19%;
+  /* #24283b */
   --secondary-foreground: 229 35% 76%;
 
-  --muted:        228 22% 18%;
-  --muted-foreground: 229 23% 44%; /* #565f89 */
+  --muted: 228 22% 18%;
+  --muted-foreground: 229 23% 44%;
+  /* #565f89 */
 
   /* Gold accent */
-  --accent:       38 68% 65%;    /* #e0af68 */
+  --accent: 38 68% 65%;
+  /* #e0af68 */
   --accent-foreground: 237 28% 10%;
 
-  --destructive:  349 87% 71%;   /* #f7768e */
+  --destructive: 349 87% 71%;
+  /* #f7768e */
   --destructive-foreground: 0 0% 95%;
 
-  --sidebar:      240 12% 10%;   /* #16161e */
+  --sidebar: 240 12% 10%;
+  /* #16161e */
   --sidebar-foreground: 229 35% 76%;
   --sidebar-border: 228 24% 25%;
   --sidebar-primary: 220 90% 72%;
@@ -90,7 +100,7 @@
 
   /* Glow colours */
   --glow-primary: 0 0 10px hsl(220 90% 72% / 0.55), 0 0 24px hsl(220 90% 72% / 0.25);
-  --glow-accent:  0 0 10px hsl(38 68% 65% / 0.55),  0 0 24px hsl(38 68% 65% / 0.25);
+  --glow-accent: 0 0 10px hsl(38 68% 65% / 0.55), 0 0 24px hsl(38 68% 65% / 0.25);
 
   /* Pixel drop-shadow offsets (no blur) */
   --px-shadow: 4px 4px 0px hsl(220 90% 72% / 0.45);
@@ -105,36 +115,44 @@
    COFFEE  (espresso dark)
    ═══════════════════════════════════════════════ */
 [data-theme="coffee"] {
-  --background:   27 47% 7%;     /* #1c110a */
-  --foreground:   40 34% 73%;    /* #d4c4a0 */
-  --border:       27 47% 20%;    /* #4a2e1a */
-  --input:        27 45% 16%;
-  --ring:         21 62% 58%;
+  --background: 27 47% 7%;
+  /* #1c110a */
+  --foreground: 40 34% 73%;
+  /* #d4c4a0 */
+  --border: 27 47% 20%;
+  /* #4a2e1a */
+  --input: 27 45% 16%;
+  --ring: 21 62% 58%;
 
-  --card:         28 55% 10%;    /* #271609 */
+  --card: 28 55% 10%;
+  /* #271609 */
   --card-foreground: 40 34% 73%;
 
-  --popover:      28 55% 10%;
+  --popover: 28 55% 10%;
   --popover-foreground: 40 34% 73%;
 
   /* Caramel primary */
-  --primary:      21 62% 58%;    /* #d4875a */
+  --primary: 21 62% 58%;
+  /* #d4875a */
   --primary-foreground: 27 47% 7%;
 
-  --secondary:    27 52% 12%;    /* #2f1c0e */
+  --secondary: 27 52% 12%;
+  /* #2f1c0e */
   --secondary-foreground: 40 34% 73%;
 
-  --muted:        27 48% 14%;
-  --muted-foreground: 30 26% 46%; /* warm bark */
+  --muted: 27 48% 14%;
+  --muted-foreground: 30 26% 46%;
+  /* warm bark */
 
   /* Honey accent */
-  --accent:       42 78% 60%;    /* #e8b84b */
+  --accent: 42 78% 60%;
+  /* #e8b84b */
   --accent-foreground: 27 47% 7%;
 
-  --destructive:  0 67% 60%;
+  --destructive: 0 67% 60%;
   --destructive-foreground: 0 0% 95%;
 
-  --sidebar:      27 55% 6%;
+  --sidebar: 27 55% 6%;
   --sidebar-foreground: 40 34% 73%;
   --sidebar-border: 27 47% 20%;
   --sidebar-primary: 21 62% 58%;
@@ -143,7 +161,7 @@
   --sidebar-accent-foreground: 40 34% 73%;
 
   --glow-primary: 0 0 10px hsl(21 62% 58% / 0.55), 0 0 24px hsl(21 62% 58% / 0.22);
-  --glow-accent:  0 0 10px hsl(42 78% 60% / 0.55),  0 0 24px hsl(42 78% 60% / 0.22);
+  --glow-accent: 0 0 10px hsl(42 78% 60% / 0.55), 0 0 24px hsl(42 78% 60% / 0.22);
 
   --px-shadow: 4px 4px 0px hsl(21 62% 58% / 0.45);
   --px-shadow-sm: 3px 3px 0px hsl(21 62% 58% / 0.4);
@@ -155,14 +173,33 @@
 
 /* ─── Keyframes ──────────────────────────────── */
 @keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes pixel-flicker {
-  0%, 96%, 100% { opacity: 1; }
-  97%           { opacity: 0.92; }
-  98%           { opacity: 1; }
+
+  0%,
+  96%,
+  100% {
+    opacity: 1;
+  }
+
+  97% {
+    opacity: 0.92;
+  }
+
+  98% {
+    opacity: 1;
+  }
 }
 
 /* ─── Base ───────────────────────────────────── */
@@ -178,16 +215,19 @@
     font-size: 20px;
     line-height: 1.75;
     animation: pixel-flicker 10s infinite;
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0,0,0,0.12) 3px,
-      rgba(0,0,0,0.12) 4px
-    );
+    background-image: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.12) 3px,
+        rgba(0, 0, 0, 0.12) 4px);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Press Start 2P', monospace;
     font-weight: 400;
     line-height: 1.7;
@@ -214,8 +254,13 @@
   }
 
   /* Neon glow on text */
-  .text-glow         { text-shadow: var(--glow-primary); }
-  .text-glow-accent  { text-shadow: var(--glow-accent); }
+  .text-glow {
+    text-shadow: var(--glow-primary);
+  }
+
+  .text-glow-accent {
+    text-shadow: var(--glow-accent);
+  }
 
   /* Blinking block cursor */
   .cursor-blink::after {
@@ -232,12 +277,20 @@
     transition: box-shadow 80ms, transform 80ms;
     cursor: pointer;
   }
-  .pixel-btn:hover  { box-shadow: var(--px-shadow-lg); }
+
+  .pixel-btn:hover {
+    box-shadow: var(--px-shadow-lg);
+  }
+
   .pixel-btn:active {
     box-shadow: 1px 1px 0px hsl(var(--primary) / 0.5);
     transform: translate(3px, 3px);
   }
-  .pixel-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .pixel-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
 
   /* VT323 body helper */
   .font-vt {
@@ -247,11 +300,29 @@
   }
 
   /* Press Start 2P helper */
-  .font-pixel { font-family: 'Press Start 2P', monospace; }
+  .font-pixel {
+    font-family: 'Press Start 2P', monospace;
+  }
 
   /* Text selection */
   ::selection {
     background: hsl(var(--primary) / 0.22);
     color: hsl(var(--primary));
+  }
+}
+
+@media (max-width: 640px) {
+
+  [class*="text-[9px]"],
+  [class*="text-[10px]"] {
+    font-size: 0.75rem;
+  }
+
+  [class*="text-[11px]"] {
+    font-size: 0.8125rem;
+  }
+
+  [class*="text-[12px]"] {
+    font-size: 0.875rem;
   }
 }
