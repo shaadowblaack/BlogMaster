@@ -11,7 +11,7 @@ export default function NotFound() {
       <p className="text-muted-foreground mb-8 max-w-md">
         The page you are looking for doesn&apos;t exist or has been moved.
       </p>
-      <Link href="/" className="inline-flex items-center justify-center border border-border px-6 py-3 text-sm font-medium hover:bg-secondary transition-colors">
+      <Link href="/home" className="inline-flex items-center justify-center border border-border px-6 py-3 text-sm font-medium hover:bg-secondary transition-colors">
         Return home
       </Link>
     </div>

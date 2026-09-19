@@ -23,7 +23,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
         style={{ boxShadow: '0 4px 0 hsl(var(--primary) / 0.2)' }}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 no-underline group shrink-0">
+        <Link href="/home" className="flex items-center gap-3 no-underline group shrink-0">
           <div
             className="w-10 h-10 flex items-center justify-center text-sm font-pixel text-primary-foreground bg-primary group-hover:bg-accent group-hover:text-accent-foreground transition-colors"
             style={{ boxShadow: 'var(--px-shadow-sm)' }}

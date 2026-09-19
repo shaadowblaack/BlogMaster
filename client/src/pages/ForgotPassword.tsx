@@ -15,7 +15,7 @@ export default function ForgotPassword() {
     setResetLink('');
     setLoading(true);
     try {
-       const data = await customFetch<{ token?: string }>(
+      const data = await customFetch<{ token?: string }>(
         '/api/users/forgot-password',
         { method: 'POST', body: JSON.stringify({ identifier: identifier.trim() }) },
       );
@@ -88,7 +88,7 @@ export default function ForgotPassword() {
             </button>
 
             <div className="text-center">
-              <Link href="/" className="font-pixel text-[12px] text-muted-foreground hover:text-primary transition-colors no-underline">
+              <Link href="/home" className="font-pixel text-[12px] text-muted-foreground hover:text-primary transition-colors no-underline">
                 ◀ BACK TO BLOG
               </Link>
             </div>
@@ -101,7 +101,7 @@ export default function ForgotPassword() {
                 If that account exists, a reset link has been prepared. Check your username or email and try again if needed.
               </p>
             </div>
-            <Link href="/" className="font-pixel text-[12px] text-muted-foreground hover:text-primary transition-colors no-underline">◀ BACK TO BLOG</Link>
+            <Link href="/home" className="font-pixel text-[12px] text-muted-foreground hover:text-primary transition-colors no-underline">◀ BACK TO BLOG</Link>
           </div>
         ) : (
           <div className="space-y-6">
@@ -130,7 +130,7 @@ export default function ForgotPassword() {
               </a>
             </div>
             <div className="text-center">
-              <Link href="/" className="font-pixel text-[12px] text-muted-foreground hover:text-primary transition-colors no-underline">◀ BACK TO BLOG</Link>
+              <Link href="/home" className="font-pixel text-[12px] text-muted-foreground hover:text-primary transition-colors no-underline">◀ BACK TO BLOG</Link>
             </div>
           </div>
         )}

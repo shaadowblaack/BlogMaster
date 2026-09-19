@@ -34,7 +34,7 @@ export default function Post() {
         <p className="font-vt text-xl text-muted-foreground">
           This story doesn&apos;t exist in the archive.
         </p>
-        <Link href="/"
+        <Link href="/home"
           className="inline-block font-pixel text-[11px] text-primary-foreground bg-primary px-4 py-3 no-underline pixel-btn mt-4">
           ◀ RETURN TO BASE
         </Link>
@@ -49,7 +49,7 @@ export default function Post() {
 
       {/* ── Status bar ── */}
       <div className="flex items-center justify-between mb-8 font-pixel text-[10px] text-muted-foreground">
-        <Link href="/" className="text-primary hover:text-accent transition-colors no-underline">
+        <Link href="/home" className="text-primary hover:text-accent transition-colors no-underline">
           ◀ QUEST LOG
         </Link>
         <span className="text-primary">[ STORY MODE ]</span>
@@ -134,7 +134,7 @@ export default function Post() {
           You finished the story. +{post.viewCount ?? 1} EXP earned.
         </p>
         <Link
-          href="/"
+          href="/home"
           className="inline-block font-pixel text-[11px] text-primary-foreground bg-primary px-4 py-3 no-underline pixel-btn mt-2"
         >
           ▶ NEXT QUEST

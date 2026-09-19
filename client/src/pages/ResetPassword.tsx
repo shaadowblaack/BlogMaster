@@ -59,7 +59,7 @@ export default function ResetPassword() {
         { method: 'POST', body: JSON.stringify({ token, newPassword }) },
       );
       setDone(true);
-      setTimeout(() => navigate('/'), 2500);
+      setTimeout(() => navigate('/home'), 2500);
     } catch (err) {
       const errorData = (err as ApiError)?.data as { error?: string } | null;
       setError(errorData?.error ?? 'Connection failed. Try again.');

@@ -11,10 +11,10 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
 
   const navItems = [
-    { href: '/dashboard',            label: 'HQ',        icon: LayoutDashboard },
-    { href: '/dashboard/posts',      label: 'QUESTS',    icon: FileText },
-    { href: '/dashboard/posts/new',  label: 'NEW QUEST', icon: PenTool },
-    { href: '/dashboard/profile',    label: 'SETTINGS',  icon: Settings },
+    { href: '/dashboard', label: 'HQ', icon: LayoutDashboard },
+    { href: '/dashboard/posts', label: 'QUESTS', icon: FileText },
+    { href: '/dashboard/posts/new', label: 'NEW QUEST', icon: PenTool },
+    { href: '/dashboard/profile', label: 'SETTINGS', icon: Settings },
   ];
 
   async function handleLogout() {
@@ -34,7 +34,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       >
         {/* back to public */}
         <Link
-          href="/"
+          href="/home"
           className="flex items-center gap-2 font-pixel text-[10px] text-muted-foreground hover:text-primary transition-colors mb-8 no-underline"
         >
           <ArrowLeft className="w-3 h-3" /> EXIT TO BLOG
@@ -67,11 +67,10 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-3 py-2 font-pixel text-[10px] transition-all no-underline ${
-                  isActive
+                className={`flex items-center gap-3 px-3 py-2 font-pixel text-[10px] transition-all no-underline ${isActive
                     ? 'bg-primary text-primary-foreground'
                     : 'text-muted-foreground hover:text-primary hover:bg-secondary'
-                }`}
+                  }`}
                 style={isActive ? { boxShadow: '3px 3px 0 hsl(191 100% 35%)' } : {}}
               >
                 <item.icon className="w-3 h-3 shrink-0" />

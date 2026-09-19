@@ -6,7 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function TagPage() {
   const [, params] = useRoute('/tags/:slug');
   const slug = params?.slug || '';
-  
+
   const { data: postsData, isLoading } = useListPosts(
     { tag: slug, status: 'published' },
     { query: { enabled: !!slug, queryKey: ['/api/posts', { tag: slug, status: 'published' }] } }
@@ -15,7 +15,7 @@ export default function TagPage() {
   return (
     <div className="max-w-2xl mx-auto py-12 animate-in fade-in">
       <header className="mb-16 border-b border-border pb-8">
-        <Link href="/" className="text-muted-foreground hover:text-foreground text-sm mb-6 inline-block transition-colors">
+        <Link href="/home" className="text-muted-foreground hover:text-foreground text-sm mb-6 inline-block transition-colors">
           &larr; Back home
         </Link>
         <h1 className="text-3xl font-serif text-foreground">
