@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { useRoute, Link } from 'wouter';
 import { useGetPostBySlug, useGetProfile } from '@/api';
 import { format } from 'date-fns';
@@ -7,11 +8,37 @@ import { CommentSection } from '@/components/comments/CommentSection';
 export default function Post() {
   const [, params] = useRoute('/posts/:slug');
   const slug = params?.slug || '';
+  const storyRef = useRef<HTMLDivElement>(null);
+  const [readingProgress, setReadingProgress] = useState(0);
 
   const { data: post, isLoading, isError } = useGetPostBySlug(slug, {
     query: { enabled: !!slug, queryKey: ['/api/posts/slug', slug] },
   });
   const { data: profile } = useGetProfile();
+
+  useEffect(() => {
+    const updateReadingProgress = () => {
+      const story = storyRef.current;
+      if (!story) return;
+
+      const storyStart = story.getBoundingClientRect().top + window.scrollY;
+      const storyEnd = storyStart + story.offsetHeight - window.innerHeight;
+      const progress = storyEnd <= storyStart
+        ? 100
+        : ((window.scrollY - storyStart) / (storyEnd - storyStart)) * 100;
+
+      setReadingProgress(Math.min(100, Math.max(0, progress)));
+    };
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+
+    return () => {
+      window.removeEventListener('scroll', updateReadingProgress);
+      window.removeEventListener('resize', updateReadingProgress);
+    };
+  }, [post]);
 
   if (isLoading) {
     return (
@@ -45,7 +72,23 @@ export default function Post() {
   const coverUrl = resolveImageUrl(post.coverImageUrl);
 
   return (
-    <article className="max-w-2xl mx-auto py-8">
+    <>
+      <div
+        className="fixed inset-x-0 top-0 z-50 h-1 bg-secondary border-b border-border"
+        role="progressbar"
+        aria-label="Story reading progress"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(readingProgress)}
+      >
+        <div
+          className="h-full bg-primary transition-[width] duration-150"
+          style={{ width: `${readingProgress}%`, boxShadow: 'var(--glow-primary)' }}
+        />
+      </div>
+
+      <article className="max-w-2xl mx-auto py-8">
+        <div ref={storyRef}>
 
       {/* ── Status bar ── */}
       <div className="flex items-center justify-between mb-8 font-pixel text-[10px] text-muted-foreground">
@@ -140,9 +183,11 @@ export default function Post() {
           ▶ NEXT QUEST
         </Link>
       </div>
+        </div>
 
       {/* ── Reactions + Comments ── */}
       <CommentSection postId={post.id} />
-    </article>
+      </article>
+    </>
   );
 }

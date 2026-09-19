@@ -26,11 +26,34 @@ interface UserAuthContextValue {
 
 const UserAuthContext = createContext<UserAuthContextValue | null>(null);
 
+function createGuestId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+
+  const randomValues = new Uint8Array(16);
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    crypto.getRandomValues(randomValues);
+  } else {
+    for (let index = 0; index < randomValues.length; index += 1) {
+      randomValues[index] = Math.floor(Math.random() * 256);
+    }
+  }
+
+  randomValues[6] = (randomValues[6] & 0x0f) | 0x40;
+  randomValues[8] = (randomValues[8] & 0x3f) | 0x80;
+
+  return Array.from(randomValues, (value, index) => {
+    const separator = index === 4 || index === 6 || index === 8 || index === 10 ? '-' : '';
+    return `${separator}${value.toString(16).padStart(2, '0')}`;
+  }).join('');
+}
+
 function getOrCreateGuestId(): string {
   const key = 'blog_guest_id';
   let id = localStorage.getItem(key);
   if (!id) {
-    id = crypto.randomUUID();
+    id = createGuestId();
     localStorage.setItem(key, id);
   }
   return id;
