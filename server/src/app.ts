@@ -11,7 +11,14 @@ const app: Express = express();
 const envOrigins = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(',').map((s) => s.trim())
   : [];
-const allowedOrigins = new Set([...envOrigins, 'https://blogmaster-client.onrender.com']);
+const localOrigins = process.env.NODE_ENV !== 'production' || envOrigins.length === 0
+  ? ['http://localhost:5173', 'http://127.0.0.1:5173']
+  : [];
+const allowedOrigins = new Set([
+  ...envOrigins,
+  ...localOrigins,
+  'https://blogmaster-client.onrender.com',
+]);
 
 app.use(
   cors({
