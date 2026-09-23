@@ -74,6 +74,9 @@ Key variables:
 | `PORT` | Server port (default 5000) |
 | `ADMIN_USERNAME` | Admin login username |
 | `ADMIN_PASSWORD` | Admin login password |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
 | `SESSION_COOKIE_SECURE` | Set `true` in production (HTTPS) |
 | `NODE_ENV` | `development` or `production` |
 
@@ -133,7 +136,7 @@ Render does not provide managed MongoDB. Use MongoDB Atlas:
 ## Production Notes
 
 - The Express server builds and serves the React frontend from `client/dist/`
-- Uploaded files are stored in `server/uploads/` and served via `/uploads/`
+- Uploaded cover images are stored in Cloudinary under `blog-master/covers`
 - Sessions are stored in MongoDB with a 7-day TTL
 - `SESSION_COOKIE_SECURE` must be `true` in production (HTTPS)
 
