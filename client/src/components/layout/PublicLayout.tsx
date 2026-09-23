@@ -4,7 +4,7 @@ import { useGetProfile } from '@/api';
 import { useUserAuth } from '@/contexts/UserAuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { AuthModal } from '@/components/auth/AuthModal';
-import { User, LogOut, KeyRound, ChevronDown } from 'lucide-react';
+import { User, LogOut, KeyRound, ChevronDown, LogIn, UserPlus } from 'lucide-react';
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   const { data: profile } = useGetProfile();
@@ -44,20 +44,18 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             <button
               onClick={() => setTheme('tokyo')}
               title="Tokyo Night Storm"
-              className={`px-2 py-1 font-pixel text-[10px] transition-colors ${
-                theme === 'tokyo'
+              className={`px-2 py-1 font-pixel text-[10px] transition-colors ${theme === 'tokyo'
                   ? 'bg-primary text-primary-foreground'
                   : 'text-muted-foreground hover:text-primary'
-              }`}
+                }`}
             >⚡</button>
             <button
               onClick={() => setTheme('coffee')}
               title="Coffee"
-              className={`px-2 py-1 font-pixel text-[10px] border-l-2 border-border transition-colors ${
-                theme === 'coffee'
+              className={`px-2 py-1 font-pixel text-[10px] border-l-2 border-border transition-colors ${theme === 'coffee'
                   ? 'bg-primary text-primary-foreground'
                   : 'text-muted-foreground hover:text-primary'
-              }`}
+                }`}
             >☕</button>
           </div>
 
@@ -76,7 +74,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
               {showUserMenu && (
                 <>
                   {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-                <div className="fixed inset-0 z-30" onClick={() => setShowUserMenu(false)} />
+                  <div className="fixed inset-0 z-30" onClick={() => setShowUserMenu(false)} />
                   <div
                     className="absolute right-0 top-full mt-1 z-40 bg-card border-2 border-primary min-w-[190px]"
                     style={{ boxShadow: 'var(--px-shadow-lg)' }}
@@ -101,16 +99,21 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowAuth('login')}
-                className="font-pixel text-[11px] text-muted-foreground hover:text-primary transition-colors"
+                title="Sign in"
+                aria-label="Sign in"
+                className="flex items-center gap-2 p-2 sm:px-1 sm:py-2 font-pixel text-[11px] text-muted-foreground hover:text-primary transition-colors"
               >
-                SIGN IN
+                <LogIn className="w-4 h-4 sm:w-3 sm:h-3" />
+                <span className="hidden sm:inline">SIGN IN</span>
               </button>
-              <span className="text-border">|</span>
               <button
                 onClick={() => setShowAuth('register')}
-                className="font-pixel text-[11px] text-primary-foreground bg-primary px-3 py-2 pixel-btn"
+                title="Sign up"
+                aria-label="Sign up"
+                className="flex items-center gap-2 font-pixel text-[11px] text-primary-foreground bg-primary p-2 sm:px-3 sm:py-2 pixel-btn"
               >
-                SIGN UP
+                <UserPlus className="w-4 h-4 sm:w-3 sm:h-3" />
+                <span className="hidden sm:inline">SIGN UP</span>
               </button>
             </div>
           )}
@@ -123,7 +126,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
 
       {/* ── Footer ── */}
       <footer className="border-t-2 border-border px-6 md:px-12 py-6 mt-8">
-          <div className=" mx-auto flex flex-col md:flex-row items-center justify-between gap-4 font-pixel text-[10px] text-muted-foreground">
+        <div className=" mx-auto flex flex-col md:flex-row items-center justify-between gap-4 font-pixel text-[10px] text-muted-foreground">
           <span> Thoughts of Shade © {new Date().getFullYear()} {name.toUpperCase()}</span>
           <div className="flex gap-6">
             {profile?.twitterUrl && (

@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import { PublicLayout } from '@/components/layout/PublicLayout';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { AdminGuard } from '@/components/auth/AdminGuard';
+import { AmbientParticles } from '@/components/ui/AmbientParticles';
 
 import Welcome from '@/pages/Welcome';
 import Home from '@/pages/Home';
@@ -31,7 +32,7 @@ function PublicRoutes() {
     <PublicLayout>
       <Switch>
         <Route path="/" component={Welcome} />
-              <Route path="/home" component={Home} />
+        <Route path="/home" component={Home} />
         <Route path="/posts/:slug" component={Post} />
         <Route path="/tags/:slug" component={TagPage} />
         <Route component={NotFound} />
@@ -76,6 +77,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
+        <AmbientParticles />
         <UserAuthProvider>
           <TooltipProvider>
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
